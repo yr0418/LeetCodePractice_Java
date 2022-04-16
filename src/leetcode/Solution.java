@@ -1,36 +1,30 @@
 package leetcode;
 
+import utils.Node;
 import utils.TreeNode;
 
+import java.util.*;
+
 class Solution {
-
-    public boolean isBalanced(TreeNode root) {
-        if (root == null) {
-            return true;
-        } else {
-            int left = maxDepth(root.left);
-            int right = maxDepth(root.right);
-            return Math.abs(left - right) <= 1 && isBalanced(root.left) && isBalanced(root.right);
+    public boolean canPlaceFlowers(int[] flowerbed, int n) {
+        for (int i = 0, len = flowerbed.length; i < len && n > 0;) {
+            if (flowerbed[i] == 1) {
+                i += 2;
+            } else if (i == flowerbed.length - 1 || flowerbed[i + 1] == 0) {
+                n--;
+                i += 2;
+            } else {
+                i += 3;
+            }
         }
+        return n <= 0;
     }
-
-    public int maxDepth(TreeNode root) {
-        if (root == null) {
-            return 0;
-        } else {
-            int leftHeight = maxDepth(root.left);
-            int rightHeight = maxDepth(root.right);
-            return Math.max(leftHeight, rightHeight) + 1;
-        }
-    }
-
-
 
     public static void main(String[] args) {
-        Solution result = new Solution();
-        int[] nums = {9,9,9,9,9};
-        String s = " fly me  to the moon ";
+        Solution solution = new Solution();
+        String s = " ";
+        int[] nums = {5,4,3,2,1};
+        String[] words = new String[]{"Hello","Alaska","Dad","Peace"};
         System.out.println();
-
     }
 }

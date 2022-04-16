@@ -1,31 +1,47 @@
 package utils;
 
-/**
- * @moduleName: Solution
- * @description:
- * @author: 杨睿
- * @date: 2022-03-17 16:47
- **/
+import java.util.*;
+
+
 class Solution {
-    public int minDepth(TreeNode root) {
-        if (root == null) {
-            return 0;
+    public int maximumProduct(int[] nums) {
+        // 最小的和第二小的
+        int min1 = Integer.MAX_VALUE, min2 = Integer.MAX_VALUE;
+        // 最大的、第二大的和第三大的
+        int max1 = Integer.MIN_VALUE, max2 = Integer.MIN_VALUE, max3 = Integer.MIN_VALUE;
+
+        for (int x : nums) {
+            if (x < min1) {
+                min2 = min1;
+                min1 = x;
+            } else if (x < min2) {
+                min2 = x;
+            }
+
+            if (x > max1) {
+                max3 = max2;
+                max2 = max1;
+                max1 = x;
+            } else if (x > max2) {
+                max3 = max2;
+                max2 = x;
+            } else if (x > max3) {
+                max3 = x;
+            }
         }
 
-        if (root.left == null && root.right == null) {
-            return 1;
-        }
-
-        int min_depth = Integer.MAX_VALUE;
-        if (root.left != null) {
-            min_depth = Math.min(minDepth(root.left), min_depth);
-        }
-        if (root.right != null) {
-            min_depth = Math.min(minDepth(root.right), min_depth);
-        }
-
-        return min_depth + 1;
+        return Math.max(min1 * min2 * max1, max1 * max2 * max3);
     }
 }
+
+
+
+
+
+
+
+
+
+
 
 
