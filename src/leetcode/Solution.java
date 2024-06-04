@@ -11,51 +11,19 @@ import java.util.logging.Logger;
 class Solution {
     private static final Logger log = Logger.getLogger(Solution.class.getName());
 
-    public boolean isPalindrome(String s) {
-        int i = 0, j = s.length()-1;
-        while (i <= j) {
-            char left = s.charAt(i);
-            if (!charIsNum(left) && !charIsLetter(left)) {
-                i++;
-                continue;
-            }
-            char right = s.charAt(j);
-            if (!charIsNum(right) && !charIsLetter(right)) {
-                j--;
-                continue;
-            }
-            if (left == right || isSameLetter(left, right)) {
-                i++;
-                j--;
+    public String convertToTitle(int columnNumber) {
+        StringBuilder sb = new StringBuilder();
+        while (columnNumber > 0) {
+            int mod = columnNumber % 26;
+            if (mod == 0) {
+                sb.append('Z');
+                columnNumber = columnNumber / 26 - 1;
             } else {
-                return false;
+                sb.append((char)('A' + mod - 1));
+                columnNumber = columnNumber / 26;
             }
         }
-        return true;
-    }
-
-    public boolean charIsNum(char ch) {
-        return ch >= '0' && ch <= '9';
-    }
-
-    public boolean charIsLetter(char ch) {
-        return (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z');
-    }
-
-    public boolean isSameLetter(char left, char right) {
-        int diffLeft = 0;
-        int diffRight = 0;
-        if (left <= 'Z') {
-            diffLeft = left - 'A';
-        } else {
-            diffLeft = left - 'a';
-        }
-        if (right <= 'Z') {
-            diffRight = right - 'A';
-        } else {
-            diffRight = right - 'a';
-        }
-        return diffLeft == diffRight;
+        return sb.reverse().toString();
     }
 
 
@@ -65,7 +33,7 @@ class Solution {
         String[] strs = {"dog", "racecar", "car"};
         String str = "{[]}";
         int[] intArr = {7,20,5,3,6,4};
-        Object result = solution.isPalindrome("A man, a plan, a canal: Panama");
+        Object result = null;
         ListNode list = Utils.buildLinkList(intArr);
         log.info(String.valueOf(result));
     }
